@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ATRefresh_Example' do
+  pod 'ATRefresh', :path => '../'
+
+  target 'ATRefresh_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
