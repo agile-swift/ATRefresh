@@ -1,0 +1,6 @@
+framework module Pods_ATRefresh_Example {
+  umbrella header "Pods-ATRefresh_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

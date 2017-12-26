@@ -1,0 +1,16 @@
+PODS:
+  - ATRefresh (0.1.0)
+
+DEPENDENCIES:
+  - ATRefresh (from `../`)
+
+EXTERNAL SOURCES:
+  ATRefresh:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ATRefresh: 1af16902903b031ed8831aad2f8069996f078ab1
+
+PODFILE CHECKSUM: b6c547c89551552c0b28fb555bdf7385dc2f63f3
+
+COCOAPODS: 1.3.1

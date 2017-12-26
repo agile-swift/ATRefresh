@@ -1,0 +1,6 @@
+framework module Pods_ATRefresh_Tests {
+  umbrella header "Pods-ATRefresh_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
