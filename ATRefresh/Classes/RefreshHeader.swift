@@ -31,10 +31,11 @@ open class RefreshHeader: RefreshComponent {
     
     /// 开始刷新
     open override func beginRefresh() {
-        super.beginRefresh()
+        if isRefreshing { return }
         UIView.animate(withDuration: 0.3, animations: {
             self.scrollView?.contentOffset.y -= self.frame.height
         })
+        super.beginRefresh()
     }
     
     /// 结束刷新
@@ -53,13 +54,18 @@ open class RefreshHeader: RefreshComponent {
     open override var state: RefreshState {
         set {
             if state == newValue { return }
+            
+            frame.size.width = scrollView?.frame.width ?? frame.size.width
+            
             let oldState = state
             super.state = newValue
             switch newValue {
             case .endRefresh:
                 if oldState == .isRefreshing {
                     UIView.animate(withDuration: 0.3, animations: {
-                        self.scrollView?.contentInset.top -= self.frame.height
+//                        self.scrollView?.contentInset.top -= self.frame.height
+                        self.scrollView?.contentInset = self.scrollViewOriginalInset
+                        self.scrollView?.contentOffset.y = -self.scrollViewOriginalInset.top
                     }, completion: { _ in
                         self.state = .idle
                         self.pullingPercent = 0
@@ -85,7 +91,9 @@ open class RefreshHeader: RefreshComponent {
         }
         
         if state == .isRefreshing {
-            scrollView.contentInset.top = frame.height + scrollViewOriginalInset.top
+            UIView.animate(withDuration: 0.3, animations: {
+                scrollView.contentInset.top = self.frame.height + self.scrollViewOriginalInset.top
+            })
             return
         }
         

@@ -17,7 +17,7 @@ open class RefreshFooter: RefreshComponent {
     public fileprivate(set) lazy var textLabel : UILabel = {
         let l = UILabel()
         l.textColor = UIColor.gray
-        l.font = UIFont.systemFont(ofSize: 14)
+        l.font = UIFont.systemFont(ofSize: 12)
         l.textAlignment = .center
         self.addSubview(l)
         return l
@@ -97,6 +97,7 @@ open class RefreshFooter: RefreshComponent {
     }
     
     override open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isIllegal { return }
         let scrollHeight = scrollView.contentOffset.y - scrollView.contentInset.top + scrollView.frame.height
         let contentHeight = scrollView.contentSize.height
         if scrollHeight - contentHeight > -preloadOffset {
@@ -114,10 +115,15 @@ open class RefreshFooter: RefreshComponent {
     }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         if keyPath == "contentSize" {
-            self.frame.origin.y = scrollView!.contentSize.height
+            let largeEnough = scrollView!.contentSize.height >= scrollView!.frame.height
+            if largeEnough {
+                self.frame.origin.y = scrollView!.contentSize.height
+                self.frame.size.width = scrollView!.frame.width
+            }
+            self.isIllegal = !largeEnough
         }
+        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
     }
     
     open override func layoutSubviews() {
@@ -128,6 +134,8 @@ open class RefreshFooter: RefreshComponent {
     // MARK: 私有
     private var refreshClosure : ((RefreshFooter) -> Void)?
 
+    private var isIllegal : Bool = true
+    
     @objc private func changeRefreshActionTarget() {
         refreshClosure?(self)
     }
