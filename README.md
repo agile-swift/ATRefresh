@@ -1,29 +1,27 @@
 # ATRefresh
 
-[![CI Status](http://img.shields.io/travis/devkevinma@gmail.com/ATRefresh.svg?style=flat)](https://travis-ci.org/devkevinma@gmail.com/ATRefresh)
-[![Version](https://img.shields.io/cocoapods/v/ATRefresh.svg?style=flat)](http://cocoapods.org/pods/ATRefresh)
-[![License](https://img.shields.io/cocoapods/l/ATRefresh.svg?style=flat)](http://cocoapods.org/pods/ATRefresh)
-[![Platform](https://img.shields.io/cocoapods/p/ATRefresh.svg?style=flat)](http://cocoapods.org/pods/ATRefresh)
+轻量级列表刷新组件
 
-## Example
+## 集成([CocoaPods](http://cocoapods.org))
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+在 podfile 文件中添加
 
-## Requirements
-
-## Installation
-
-ATRefresh is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
+```
+source "https://github.com/agile-swift/Specs.git"
 pod 'ATRefresh'
 ```
 
-## Author
+
+## 详细信息
+
+请移步[https://github.com/agile-swift/AgileTools/blob/master/README.md](https://github.com/agile-swift/AgileTools/blob/master/README.md)
+
+
+## 功能
+
+* 为UISCrollView添加上拉和下拉功能
+* 完全自定义刷新样式
+
+## 反馈
 
 devkevinma@gmail.com, admin@makaiwen.com
-
-## License
-
-ATRefresh is available under the MIT license. See the LICENSE file for more info.
