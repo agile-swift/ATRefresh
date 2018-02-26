@@ -98,7 +98,7 @@ open class RefreshFooter: RefreshComponent {
     
     override open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if isIllegal { return }
-        let scrollHeight = scrollView.contentOffset.y - scrollView.contentInset.top + scrollView.frame.height
+        let scrollHeight = scrollView.contentOffset.y + scrollView.frame.height
         let contentHeight = scrollView.contentSize.height
         if scrollHeight - contentHeight > -preloadOffset {
             if self.state != .endWithoutData {
@@ -116,9 +116,9 @@ open class RefreshFooter: RefreshComponent {
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "contentSize" {
-            let largeEnough = scrollView!.contentSize.height >= scrollView!.frame.height
+            let largeEnough = scrollView!.contentSize.height >= (scrollView!.frame.height - scrollView!.contentInset.top - scrollView!.contentInset.bottom)
             if largeEnough {
-                self.frame.origin.y = scrollView!.contentSize.height
+                self.frame.origin.y = scrollView!.contentSize.height + scrollView!.contentInset.top
                 self.frame.size.width = scrollView!.frame.width
             }
             self.isIllegal = !largeEnough
