@@ -140,4 +140,7 @@ open class RefreshFooter: RefreshComponent {
         refreshClosure?(self)
     }
 
+    deinit {
+        scrollView?.removeObserver(self, forKeyPath: "contentSize")
+    }
 }

@@ -11,7 +11,7 @@ private var RefreshHeaderKey : Void? = nil
 private var RefreshFooterKey : Void? = nil
 
 public extension UIScrollView {
-
+    
     /// 注册下拉刷新组件，只能注册一次，多次注册不会报错，但不会有效
     ///
     /// - Parameters:
@@ -71,5 +71,19 @@ public extension UIScrollView {
             newFooter.frame = CGRect.init(x: 0, y: contentSize.height, width: frame.width, height: newFooter.frame.height)
         }
     }
-
+    
+    public func removeRefreshViews() {
+        if (self.refreshFooter != nil) {
+            self.refreshFooter!.removeFromSuperview()
+            self.removeObserver(self.refreshFooter!, forKeyPath: "contentSize")
+            self.removeObserver(self.refreshFooter!, forKeyPath: "contentOffset")
+            self.refreshFooter = nil
+        }
+        if (self.refreshHeader != nil) {
+            self.refreshHeader?.removeFromSuperview()
+            self.removeObserver(self.refreshHeader!, forKeyPath: "contentOffset")
+            self.refreshHeader = nil
+        }
+    }
 }
+

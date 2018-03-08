@@ -10,7 +10,7 @@ import UIKit
 /// 基类刷新组件
 open class RefreshComponent: UIView {
     
-    var refreshTarget : AnyObject!
+    weak var refreshTarget : AnyObject!
     
     var refreshAction : Selector
     
@@ -37,7 +37,7 @@ open class RefreshComponent: UIView {
         didSet {
             if oldValue == state { return }
             if state == .isRefreshing {
-                _ = self.refreshTarget.perform(refreshAction)
+                _ = self.refreshTarget?.perform(refreshAction)
             }
         }
     }
