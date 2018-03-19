@@ -9,7 +9,7 @@ import UIKit
 
 /// 底部加载等多控件，建议使用子类
 open class RefreshFooter: RefreshComponent {
-
+    
     /// 预加载偏移量，默认为0，该数值要求≥0
     public var preloadOffset : CGFloat = 0
     
@@ -81,7 +81,7 @@ open class RefreshFooter: RefreshComponent {
             break
         }
     }
-
+    
     // MARK: 重写
     
     public override var scrollView: UIScrollView? {
@@ -116,12 +116,13 @@ open class RefreshFooter: RefreshComponent {
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "contentSize" {
-            let largeEnough = scrollView!.contentSize.height >= (scrollView!.frame.height - scrollView!.contentInset.top - scrollView!.contentInset.bottom)
-            if largeEnough {
-                self.frame.origin.y = scrollView!.contentSize.height + scrollView!.contentInset.top
-                self.frame.size.width = scrollView!.frame.width
-            }
-            self.isIllegal = !largeEnough
+            // 忘了为什么加了，貌似没有用
+            //            let largeEnough = scrollView!.contentSize.height >= (scrollView!.frame.height - scrollView!.contentInset.top - scrollView!.contentInset.bottom)
+            //            if largeEnough {
+            //            }
+            self.frame.origin.y = scrollView!.contentSize.height + scrollView!.contentInset.top
+            self.frame.size.width = scrollView!.frame.width
+            //            self.isIllegal = !largeEnough
         }
         super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
     }
@@ -133,14 +134,15 @@ open class RefreshFooter: RefreshComponent {
     }
     // MARK: 私有
     private var refreshClosure : ((RefreshFooter) -> Void)?
-
+    
     private var isIllegal : Bool = true
     
     @objc private func changeRefreshActionTarget() {
         refreshClosure?(self)
     }
-
+    
     deinit {
         scrollView?.removeObserver(self, forKeyPath: "contentSize")
     }
 }
+
