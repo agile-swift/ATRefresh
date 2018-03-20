@@ -13,6 +13,8 @@ open class RefreshGifHeader: RefreshHeader {
     
     private var lastState : RefreshState?
     
+    open var animationDuration : TimeInterval = 0.3
+    
     private lazy var imageView : UIImageView = {
         let iv = UIImageView.init(frame: bounds)
         iv.contentMode = .center

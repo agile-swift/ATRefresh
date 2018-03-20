@@ -23,7 +23,7 @@ open class RefreshHeader: RefreshComponent {
     }
     
     /// 下拉百分比，可以超过100%
-    var pullingPercent : CGFloat = 0 {
+    open internal(set) var pullingPercent : CGFloat = 0 {
         didSet {
             stateDidUpdate(state: state, percent: self.pullingPercent)
         }
