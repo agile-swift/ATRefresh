@@ -46,7 +46,7 @@ open class RefreshGifHeader: RefreshHeader {
         case .willRefresh,.isRefreshing:
             if lastState == state { return }
             imageView.animationImages = images
-            imageView.animationDuration = 0.3
+            imageView.animationDuration = animationDuration
             imageView.startAnimating()
             break
         default:
