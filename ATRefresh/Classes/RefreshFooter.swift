@@ -35,7 +35,8 @@ open class RefreshFooter: RefreshComponent {
     ///
     /// - Parameter refreshClosure: 刷新闭包，上拉到一定程度会触发闭包，在闭包中执行加载数据的方法
     required public init(refreshClosure : @escaping (RefreshFooter) -> Void ) {
-        super.init(refreshTarget: self, action: #selector(changeRefreshActionTarget))
+        super.init(refreshTarget: "" as AnyObject, action: #selector(changeRefreshActionTarget))
+        self.refreshTarget = self
         self.refreshClosure = refreshClosure
         self.frame.size.height = 44
     }

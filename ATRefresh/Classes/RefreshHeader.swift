@@ -14,7 +14,8 @@ open class RefreshHeader: RefreshComponent {
     ///
     /// - Parameter refreshClosure: 刷新闭包，下拉到一定程度会触发闭包，在闭包中执行加载数据的方法
     required public init(refreshClosure : @escaping (RefreshHeader) -> Void ) {
-        super.init(refreshTarget: self, action: #selector(changeRefreshActionTarget))
+        super.init(refreshTarget: "" as AnyObject, action: #selector(changeRefreshActionTarget))
+        self.refreshTarget = self
         self.refreshClosure = refreshClosure
     }
     
