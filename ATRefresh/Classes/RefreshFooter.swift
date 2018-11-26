@@ -25,7 +25,7 @@ open class RefreshFooter: RefreshComponent {
     
     /// 显示加载动画的菊花
     public fileprivate(set) lazy var activityView : UIActivityIndicatorView = {
-        let a = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        let a = UIActivityIndicatorView.init(style: UIActivityIndicatorView.Style.gray)
         self.addSubview(a)
         a.hidesWhenStopped = true
         return a
